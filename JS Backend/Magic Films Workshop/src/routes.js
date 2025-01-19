@@ -4,7 +4,7 @@ import movieController from "./controller/movieContorller.js"
 
 const routes = Router();
 routes.use(homeConroller);
-routes.use(movieController);
+routes.use(`/movies`,movieController);
 
 
 
