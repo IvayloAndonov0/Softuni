@@ -1,9 +1,9 @@
 import homeConroller from "./controller/homeController.js"
 import { Router } from "express"
 
-const router = Router();
-router.use(homeConroller);
+const routes = Router();
+routes.use(homeConroller);
 
 
 
-export default router;
+export default routes;
