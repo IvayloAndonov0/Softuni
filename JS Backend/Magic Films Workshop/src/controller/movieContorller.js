@@ -20,9 +20,9 @@ movieController.post(`/create`,(req,res)=>{
    res.redirect(`/`);
 });
 movieController.get(`/search`,(req,res)=>{
+    const movies = movieService.getAll();
     
-    
-    res.render(`search`)
+    res.render(`search`,{movies})
 });
 
 
