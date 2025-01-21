@@ -19,6 +19,11 @@ movieController.post(`/create`,(req,res)=>{
   movieService.create(newMovie);
    res.redirect(`/`);
 });
+movieController.get(`/search`,(req,res)=>{
+    
+    
+    res.render(`search`)
+});
 
 
 
