@@ -5,6 +5,7 @@ import movies from "../movies.js";
 
 
 export default {
+    getAll(){return movies},
     findOne(movieId){
     return movies.find(movie => movie.id == movieId);
     },
