@@ -20,9 +20,11 @@ movieController.post(`/create`,(req,res)=>{
    res.redirect(`/`);
 });
 movieController.get(`/search`,(req,res)=>{
-    const movies = movieService.getAll();
-    
-    res.render(`search`,{movies})
+    const filter = req.query;
+    const movies = movieService.getAll(filter);
+
+    res.render('search', { movies, filter });
+
 });
 
 
