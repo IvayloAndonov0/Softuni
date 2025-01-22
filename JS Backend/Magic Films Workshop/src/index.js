@@ -19,7 +19,10 @@ try {
 
 app.engine(`hbs`,handlebars.engine({
     extname:`hbs`,
-    helpers:{showRating : showRatingHelper}
+    helpers:{showRating : showRatingHelper},
+    runtimeOptions:{
+        allowProtoPropertiesByDefault:true
+    }
 }));
 
 app.set(`view engine`,`hbs`);
