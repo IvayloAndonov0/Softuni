@@ -7,10 +7,10 @@ const movieController = Router();
 movieController.get(`/create`,(req,res)=>{
     res.render(`create`)
 });
-movieController.get(`/:id/details`,(req,res)=>{
+movieController.get(`/:id/details`,async (req,res)=>{
     const movieId = req.params.id;
 
-    const movie = movieService.findOne(movieId);
+    const movie = await movieService.getOne(movieId);
     
     res.render(`details`,{movie})
 });

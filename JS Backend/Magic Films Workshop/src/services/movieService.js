@@ -23,8 +23,10 @@ export default {
 
         return result;
     },
-    findOne(movieId){
-    return movies.find(movie => movie.id == movieId);
+    getOne(movieId) {
+        const result = Movie.findById(movieId);
+
+        return result;
     },
     create(movieData){
         const newId = uuid();
