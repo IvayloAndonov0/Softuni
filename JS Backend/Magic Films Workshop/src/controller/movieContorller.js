@@ -12,7 +12,7 @@ movieController.get(`/:id/details`,async (req,res)=>{
 
     const movie = await movieService.getOne(movieId);
     
-    res.render(`details`,{movie})
+    res.render(`movie/details`,{movie})
 });
 movieController.post(`/create`,async (req,res)=>{
   const newMovie = req.body;
