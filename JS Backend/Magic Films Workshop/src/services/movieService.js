@@ -34,5 +34,8 @@ export default {
 
         });
         return result;
+    },
+    attachCast(movieId,castId){
+        return Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } });
     }
 }
