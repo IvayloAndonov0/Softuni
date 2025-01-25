@@ -26,6 +26,11 @@ movieController.get(`/search`, async (req,res)=>{
     res.render('search', { movies, filter });
 
 });
+movieController.get(`/:movieId/attach-cast`, async (req,res)=>{
+    const movieId = req.params.movieId;
+    res.render('movie/cast-attach');
+
+});
 
 
 
