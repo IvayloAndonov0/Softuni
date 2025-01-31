@@ -9,7 +9,6 @@ movieController.get(`/create`,(req,res)=>{
     res.render(`create`)
 });
 movieController.get(`/:id/details`,async (req,res)=>{
-    console.log(req.user);
     const movieId = req.params.id;
 
     const movie = await movieService.getOne(movieId).populate(`casts`);

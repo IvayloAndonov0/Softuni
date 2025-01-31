@@ -15,7 +15,8 @@ export const authMiddleware = ( req, res, next ) => {
       req.user = decodedToken;
       next();
     } catch (err) {
-        console.log(err.message);
+      res.clearCookie(`auth`);
+      res.redirect(`/auth/login`);
     }
     
 }
