@@ -1,8 +1,11 @@
 import User from "../models/User.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+import "dotenv/config";
 
-const secret = `12022007dobricheg`
+const secret = process.env.JWT_SECRET;
+
+
 export default {
     register(userData){
         return User.create(userData);
