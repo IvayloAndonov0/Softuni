@@ -4,7 +4,6 @@ const secret = process.env.JWT_SECRET;
 export const authMiddleware = ( req, res, next ) => {
     const token = req.cookies[`auth`];
     
-
     if(!token){
       return next();
     }
@@ -18,6 +17,15 @@ export const authMiddleware = ( req, res, next ) => {
     } catch (err) {
       res.clearCookie(`auth`);
       res.redirect(`/auth/login`);
+
     }
     
+};
+
+export const isAuth = (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/auth/login');
+  } 
+
+  next();
 }

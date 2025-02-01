@@ -2,10 +2,12 @@ import { Router } from "express";
 
 import  movieService from "../services/movieService.js";
 import castService from "../services/castService.js";
+import { isAuth } from "../middlewares/authMiddleware.js";
 
 const movieController = Router();
 
-movieController.get(`/create`,(req,res) => {
+movieController.get(`/create`,isAuth,(req,res) => {
+    
     res.render(`create`)
 });
 movieController.get(`/:id/details`,async (req,res) => {
@@ -16,7 +18,7 @@ movieController.get(`/:id/details`,async (req,res) => {
     
     res.render(`movie/details`,{movie,isCreator})
 });
-movieController.post(`/create`,async (req,res) => {
+movieController.post(`/create`,isAuth,async (req,res) => {
   const newMovie = req.body;
   const userId = req.user?.id;
     await  movieService.create(newMovie,userId);
@@ -29,21 +31,21 @@ movieController.get(`/search`, async (req,res) => {
     res.render('search', { movies, filter });
 
 });
-movieController.get(`/:movieId/attach-cast`, async (req,res) => {
+movieController.get(`/:movieId/attach-cast`,isAuth, async (req,res) => {
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId);
     const casts = await castService.getAll();
     res.render('movie/cast-attach',{movie,cast:casts});
 
 });
-movieController.post(`/:movieId/attach-cast`, async (req,res) => {
+movieController.post(`/:movieId/attach-cast`,isAuth, async (req,res) => {
     const movieId = req.params.movieId;
     const castId = req.body.cast;
     await movieService.attachCast(movieId,castId);
     res.redirect(`/movies/${movieId}/details`);
 
 });
-movieController.get(`/:movieId/delete`, async (req,res) => {
+movieController.get(`/:movieId/delete`,isAuth, async (req,res) => {
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId);
    if(!movie.creator.equals(req.user.id)){
@@ -69,14 +71,15 @@ function getCategoriesData(category){
     }));
     return categoreis
 }
-movieController.get(`/:movieId/edit`, async (req,res) => {
+movieController.get(`/:movieId/edit`,isAuth, async (req,res) => {
+    
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId);
     const categories = getCategoriesData(movie.category);
     
    res.render(`movie/edit`,{movie,categories});
 });
-movieController.post(`/:movieId/edit`, async (req,res) => {
+movieController.post(`/:movieId/edit`,isAuth, async (req,res) => {
     const movieId = req.params.movieId;
     const movie = req.body;
     await movieService.update(movieId,movie);
