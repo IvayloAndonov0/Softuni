@@ -12,8 +12,9 @@ movieController.get(`/:id/details`,async (req,res)=>{
     const movieId = req.params.id;
 
     const movie = await movieService.getOne(movieId).populate(`casts`);
+    const isCreator = movie.creator && movie.creator?.toString() === req.user.id;
     
-    res.render(`movie/details`,{movie})
+    res.render(`movie/details`,{movie,isCreator})
 });
 movieController.post(`/create`,async (req,res)=>{
   const newMovie = req.body;
