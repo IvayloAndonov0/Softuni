@@ -12,7 +12,7 @@ movieController.get(`/:id/details`,async (req,res)=>{
     const movieId = req.params.id;
 
     const movie = await movieService.getOne(movieId).populate(`casts`);
-    const isCreator = movie.creator && movie.creator?.toString() === req.user.id;
+    const isCreator =  movie.creator?.equals(req.user.id);
     
     res.render(`movie/details`,{movie,isCreator})
 });
